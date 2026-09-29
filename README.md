@@ -1,6 +1,6 @@
 **[English](#lichess-equivalent)** · **[Türkçe](#turkce)**
 
-# lichess-equivalent
+# Lichess-equivalent
 
 A chess arbiter that plays by **lichess's rules** rather than FIDE's, in a single HTML file of **3,022 bytes** — and the same arbiter stripped of its board, in **1,206**. Two players, one screen. No libraries, no build step, no server. Download a file, double-click, play.
 
@@ -12,8 +12,8 @@ Part of the [Golfstack](https://www.fidelite.art/) project.
 
 | file | interface | bytes | GitHub Pages | project site |
 | --- | --- | --- | --- | --- |
-| `index.html` | clickable board, clock, lichess colours | 3,022 | [lichess-equivalent](https://cuneytinann.github.io/lichess-equivalent/) | [Lichess-equivalent.html](https://www.fidelite.art/special/Lichess-equivalent.html) |
-| `numerical_packed.html` | square numbers typed into a `prompt()` box, no board | 1,206 | [numerical_packed.html](https://cuneytinann.github.io/lichess-equivalent/numerical_packed.html) | [Lichess-equivalent_numerical.html](https://www.fidelite.art/special/Lichess-equivalent_numerical.html) |
+| `index.html` | clickable board, clock, lichess colours | 3,022 | [Lichess-equivalent](https://cuneytinann.github.io/Lichess-equivalent/) | [Lichess-equivalent.html](https://www.fidelite.art/special/Lichess-equivalent.html) |
+| `numerical_packed.html` | square numbers typed into a `prompt()` box, no board | 1,206 | [numerical_packed.html](https://cuneytinann.github.io/Lichess-equivalent/numerical_packed.html) | [Lichess-equivalent_numerical.html](https://www.fidelite.art/special/Lichess-equivalent_numerical.html) |
 
 On the project site both builds live under `special/`, off to the side of the `L1`–`L3` ladder. They are not another rung on it; they follow a different rulebook.
 
@@ -211,7 +211,7 @@ MIT
 
 <a id="turkce"></a>
 
-# lichess-equivalent (Türkçe)
+# Lichess-equivalent (Türkçe)
 
 FIDE'nin değil, **lichess'in kurallarıyla** hükmeden bir satranç hakemi; tek bir HTML dosyasında **3.022 bayt** — ve aynı hakemin tahtasından soyulmuş hâli, **1.206 baytta**. İki oyuncu, tek ekran. Kütüphane yok, derleme adımı yok, sunucu yok. Dosyayı indirin, çift tıklayın, oynayın.
 
@@ -223,8 +223,8 @@ FIDE'nin değil, **lichess'in kurallarıyla** hükmeden bir satranç hakemi; tek
 
 | dosya | arayüz | bayt | GitHub Pages | proje sitesi |
 | --- | --- | --- | --- | --- |
-| `index.html` | tıklanabilir tahta, saat, lichess renkleri | 3.022 | [lichess-equivalent](https://cuneytinann.github.io/lichess-equivalent/) | [Lichess-equivalent.html](https://www.fidelite.art/special/Lichess-equivalent.html) |
-| `numerical_packed.html` | `prompt()` kutusuna yazılan kare numaraları, tahta yok | 1.206 | [numerical_packed.html](https://cuneytinann.github.io/lichess-equivalent/numerical_packed.html) | [Lichess-equivalent_numerical.html](https://www.fidelite.art/special/Lichess-equivalent_numerical.html) |
+| `index.html` | tıklanabilir tahta, saat, lichess renkleri | 3.022 | [Lichess-equivalent](https://cuneytinann.github.io/Lichess-equivalent/) | [Lichess-equivalent.html](https://www.fidelite.art/special/Lichess-equivalent.html) |
+| `numerical_packed.html` | `prompt()` kutusuna yazılan kare numaraları, tahta yok | 1.206 | [numerical_packed.html](https://cuneytinann.github.io/Lichess-equivalent/numerical_packed.html) | [Lichess-equivalent_numerical.html](https://www.fidelite.art/special/Lichess-equivalent_numerical.html) |
 
 Proje sitesinde iki sürüm de `special/` altında, `L1`–`L3` merdiveninin bir kenarında durur. O merdivenin bir basamağı değildirler; başka bir kural kitabını izlerler.
 
