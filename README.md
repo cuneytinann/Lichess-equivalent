@@ -2,7 +2,7 @@
 
 # Lichess-equivalent
 
-A chess arbiter that plays by **lichess's rules** rather than FIDE's, in a single HTML file of **3,018 bytes** — and the same arbiter stripped of its board, in **1,201**. Two players, one screen. No libraries, no build step, no server. Download a file, double-click, play.
+A chess arbiter that plays by **lichess's rules** rather than FIDE's, in a single HTML file of **2,838 bytes** — and the same arbiter stripped of its board, in **1,118**. Two players, one screen. No libraries, no build step, no server. Download a file, double-click, play.
 
 The two rulebooks are close, but they are not the same book, and every place they part ways is written down below.
 
@@ -12,8 +12,8 @@ Part of the [Golfstack](https://www.fidelite.art/) project.
 
 | file | interface | bytes | GitHub Pages | project site |
 | --- | --- | --- | --- | --- |
-| `index.html` | clickable board, clock, lichess colours | 3,018 | [Lichess-equivalent](https://cuneytinann.github.io/Lichess-equivalent/) | [Lichess-equivalent.html](https://www.fidelite.art/special/Lichess-equivalent.html) |
-| `numerical_packed.html` | square numbers typed into a `prompt()` box, no board | 1,201 | [numerical_packed.html](https://cuneytinann.github.io/Lichess-equivalent/numerical_packed.html) | [Lichess-equivalent_numerical.html](https://www.fidelite.art/special/Lichess-equivalent_numerical.html) |
+| `index.html` | clickable board, clock, lichess colours | 2,838 | [Lichess-equivalent](https://cuneytinann.github.io/Lichess-equivalent/) | [Lichess-equivalent.html](https://www.fidelite.art/special/Lichess-equivalent.html) |
+| `numerical_packed.html` | square numbers typed into a `prompt()` box, no board | 1,118 | [numerical_packed.html](https://cuneytinann.github.io/Lichess-equivalent/numerical_packed.html) | [Lichess-equivalent_numerical.html](https://www.fidelite.art/special/Lichess-equivalent_numerical.html) |
 
 On the project site both builds live under `special/`, off to the side of the `L1`–`L3` ladder. They are not another rung on it; they follow a different rulebook.
 
@@ -21,19 +21,19 @@ Anything from late 2020 onwards will run them: Chrome 85+, Firefox 79+, Safari 1
 
 **On the board.** Click a piece, then click where it should go. Legal squares pick up a dot, a piece you can take picks up a ring, the square you came from and the square you landed on stay tinted, and a king in check glows red. After every move the board turns around to face whoever is to play. When a pawn reaches the last rank the file it landed on turns into the picker: the four promotion choices sit stacked on the board itself, each on a grey disc, and you click the one you want. `½` offers a draw, or claims one when you are entitled to it, and it lights up on its own when the offer is yours to answer or the position has come round for the third time; `⚐` resigns. The two controls sit side by side and look alike on purpose — same height, white on colour, green for the draw and red for the resignation. The clock starts at ten minutes and hands back five seconds a move.
 
-**Without the board.** `numerical_packed.html` draws nothing at all. Squares are numbered 0 to 63, a1 through h8 — the engine's own indices — and a move is the two numbers written end to end: e2–e4 is `1228`. To promote, add a fifth digit — `0` bishop, `1` rook, `2` knight, anything else queen. A draw is offered the same way, by hanging a non-digit on the end of the move: `1228x` plays e2–e4 with an offer attached. Type the non-digit on its own and the offer still stands, but you owe a move afterwards. The opponent accepts by answering in kind; a plain move declines it and wipes it off. If the position has already come up three times, that same non-digit claims the threefold outright. To resign, leave the box empty or press Cancel.
+**Without the board.** `numerical_packed.html` draws nothing at all. A square is two digits, rank first and file second, each counted from 0: a1 is `00`, e2 is `14`, h8 is `77` — the engine's own 0x88 index, written in hexadecimal. A move is the two squares written end to end: e2–e4 is `1434`. An `8` or a `9` in either digit points off the board, and the arbiter refuses it like any other illegal move. To promote, add a fifth digit — `0` bishop, `1` rook, `2` knight, anything else queen. A draw is offered the same way, by hanging a non-digit on the end of the move: `1434x` plays e2–e4 with an offer attached. Type the non-digit on its own and the offer still stands, but you owe a move afterwards. The opponent accepts by answering in kind; a plain move declines it and wipes it off. If the position has already come up three times, that same non-digit claims the threefold outright. To resign, leave the box empty or press Cancel.
 
 That is the one place the two builds part company, and it is a difference of gesture rather than of rule. On the board a draw offer is a standing flag you raise with `½` and lower the same way; in the dialog it rides along with a move. Either way the arbiter reads the same two bits, and either way the opponent's plain move turns the offer down. The dialog title carries White's clock, Black's clock and the last move you got past the arbiter, so when an illegal move is quietly refused you will see that the last one never changed. Both clocks start at 900,000 milliseconds — fifteen minutes, no increment — and they keep running while the dialog is open, so thinking costs you what it would over the board. Keeping track of the position is your job.
 
 ## Two files, one arbiter
 
-These are not a full version and a cut-down one. Same game, same rules, same core — and **1,201 bytes is what that core really costs.** Everything on top of it exists for you, not for chess.
+These are not a full version and a cut-down one. Same game, same rules, same core — and **1,118 bytes is what that core really costs.** Everything on top of it exists for you, not for chess.
 
-The 1,816 bytes `index.html` spends beyond the packed file buy a board you can see, pieces you can click, a clock that ticks, a promotion picker drawn onto the board, colours that tell you which squares are open. Strip all of it away and not one rule moves. Mate is still mate, en passant is still en passant, the fifty-move counter still fills on exactly the same ply.
+The 1,720 bytes `index.html` spends beyond the packed file buy a board you can see, pieces you can click, a clock that ticks, a promotion picker drawn onto the board, colours that tell you which squares are open. Strip all of it away and not one rule moves. Mate is still mate, en passant is still en passant, the fifty-move counter still fills on exactly the same ply.
 
-So the two files answer two different questions. *What does it cost to referee a game of chess?* Twelve hundred bytes. *What does it cost to let a human enjoy one?* Another eighteen hundred.
+So the two files answer two different questions. *What does it cost to referee a game of chess?* Eleven hundred bytes. *What does it cost to let a human enjoy one?* Another seventeen hundred.
 
-That is a claim worth measuring rather than asserting, so both builds were run side by side. First their rule layers, move for move: 21,410 plies, with the legal-move list of every piece belonging to the side to play compared square by square, and the board, the side to move, the en passant square, the castling rights, the halfmove clock and the material verdicts compared after each one. 142,253 comparisons, not a single disagreement. Then fifty complete games, played by clicking in Chrome and replayed digit by digit through the `prompt()` box — 16,630 plies, the same result code every time.
+That is a claim worth measuring rather than asserting, so both builds were run side by side. First their rule layers, move for move: 21,410 plies, with the legal-move list of every piece belonging to the side to play compared square by square, and the board, the side to move, the en passant square, the castling rights, the halfmove clock and the material verdicts compared after each one. 142,253 comparisons, not a single disagreement. Then fifty complete games, played by clicking in Chrome and replayed digit by digit through the `prompt()` box — 16,630 plies, the same result code every time. When both builds moved onto the 0x88 engine in October 2026 the second test was run again on the new pair: 30 games clicked out in Chrome, 10,377 plies, replayed digit by digit — the same result code and the same final board every time.
 
 ## Why lichess and not FIDE
 
@@ -84,7 +84,7 @@ The FIDE build on the project site has fifteen codes and calls insufficient mate
 
 ## What's in it
 
-- **Every piece's movement**, worked out with arithmetic. No direction tables, no offset arrays.
+- **Every piece's movement**, worked out with arithmetic on a 0x88 board. No direction tables, no offset arrays.
 - **Full legality.** A move that would leave your own king in check is never let through.
 - **Castling** on both wings, with all of it checked: the right still standing, the rook's path clear, the king not in check, not crossing an attacked square, not landing on one.
 - **En passant**, including the repetition-key subtlety above.
@@ -115,37 +115,40 @@ Every byte of `index.html`, by part.
 
 | part | bytes | |
 | --- | --- | --- |
-| markup and CSS | 629 | board, panel, controls, colours, layout |
+| markup and CSS | 627 | board, panel, controls, colours, layout |
 | `<script>` tags | 17 | |
-| state and aliases | 181 | board, clock, castling rights, repetition table |
-| `G` | 248 | can this piece reach that square |
-| `V` | 51 | is this square attacked |
-| `L` | 101 | is this move legal — play it, ask, take it back |
-| `C` | 28 | which castling right a square forfeits |
-| `M` | 221 | counter, promotion, en passant victim, rook hop, en passant square |
-| `I`, `H` | 153 | material, and whether mate is possible at all |
-| `Z`, `D`, `F` | 151 | the verdict, the draw, the flag |
-| `j` | 62 | the clock |
-| setup | 71 | the 64 cells, generated at load |
-| `d` | 782 | draw the board, and the promotion picker on it |
-| `A`, `Bt`, `S` | 292 | play the move, the buttons, the click |
+| state | 125 | the 0x88 board, castling rights, en passant square, counters, selection |
+| `C` | 29 | which castling right a square forfeits |
+| `G` | 242 | can this piece reach that square |
+| `T` | 53 | is this square attacked — the king's, unless told otherwise |
+| `U` | 136 | make the move on a copy: promotion, en passant victim, rook hop |
+| `L` | 55 | is this move legal — make it, ask, take it back |
+| `M` | 110 | play it for real: counter, castling rights, side to move, en passant square, position key |
+| `V` | 135 | can the other side still mate, on material alone |
+| `s`, `J` | 52 | the verdict on flag fall and resignation, the claims |
+| repetition table and clock | 42 | |
+| `j` | 52 | the clock |
+| aliases and setup | 109 | `innerHTML`, the piece glyphs, the 64 cells generated at load |
+| `F` | 678 | draw the board, and the promotion picker on it |
+| `E`, `K` | 345 | play the move and give the verdict, the buttons, the click |
 | first draw and interval | 31 | |
-| **total** | **3,018** | |
+| **total** | **2,838** | |
 
-Sliced the other way: the rules come to **1,112** bytes and the page that shows them to **1,906**. The referee is cheap and the stage is expensive, which is exactly the argument the packed file makes.
+Sliced the other way (the way the project site colours the source, with the verdict after each move counted as rules), the rules come to **1,107** bytes and the page that shows them to **1,731**. The referee is cheap and the stage is expensive, which is exactly the argument the packed file makes.
+
+The names are those of FideLite's `L3`: a letter does the same job in both, and `C`, `G`, `T`, `U`, `L` and `M` are byte for byte the functions in FideLite's `engine.js`. The table's id is `u` rather than `T`, because `T` is now the check test.
 
 ## Verification
 
 Both builds were checked by running them rather than by reading them. `index.html` was driven through real Chrome over the DevTools protocol and again under jsdom; `numerical_packed.html` ran in Node against a stubbed `prompt()`.
 
-- **perft**, on both builds, over the five standard positions: 4,865,609 from the starting position at depth 5; 4,085,603 from Kiwipete at depth 4; 674,624 from CPW position 3 at depth 5; 422,333 from position 4 at depth 4; 2,103,487 from position 5 at depth 4.
+- **perft**, on both builds, over the five standard positions: 197,281 from the starting position at depth 4; 97,862 from Kiwipete at depth 3; 43,238 from CPW position 3 at depth 4; 9,467 from position 4 at depth 3; 62,379 from position 5 at depth 3. The move generator is FideLite's, and FideLite's own suite runs it far deeper.
 - **All fourteen endings**, each one reached and checked — `TM` and `RM` among them, and the automatic `50` firing on ply 100 exactly.
 - **The two builds against each other**, twice over: 21,410 plies of step-by-step comparison on the rule layer, taking in 142,253 legal-move lists and the full state after every ply; then 50 complete games clicked out in Chrome and replayed digit by digit in the numerical build, 16,630 plies. Neither run turned up a difference.
-- **Markup**: the W3C Nu Html Checker returns zero errors and zero warnings on `index.html`. Standards mode, UTF-8, no BOM, not a single line break in the file.
+- **Markup**: the W3C Nu Html Checker returns zero errors and zero warnings on `index.html`, before the 0x88 rewrite and after it. Standards mode, UTF-8, no BOM, not a single line break in the file.
 - **Rendering**, cell by cell in Chrome: a 568×568 board of 71×71 squares, the last move and the selection tinted correctly on light and dark squares alike, the check glow on the king's square and nowhere else, and the promotion discs landing on the right four squares of the right file with all four pieces in the mover's colour, whatever stands underneath them.
-- **The switch to 0–63.** When the square numbering moved from 1–64 to 0–63, `numerical_packed.html` was repacked with the settings below and run in lock step against the previous file — the old one fed 1–64, the new one the same squares in 0–63 — over 100 games and 11,540 plies, comparing the full state after every ply: no difference. perft to depth 3 on the five standard positions passes, and so do scripted checks on invalid input: `-1`, the same square twice, off-board squares, a pawn sent past the last rank.
-- **The rule optimizations of September 2026.** Both builds took over the rule-side optimizations made in [FideLite](https://github.com/cuneytinann/FideLite): the pawn's double step and castling both walk through `S()`, the castling rook's square is computed from the king's target, the start-rank test is shorter, `I` reads the square colour and the side it counts more cheaply, and the packed build writes the en passant square with one list instead of two steps. None of them changes a single verdict. `index.html` was run side by side with its previous version on random games — legal move lists, the en passant square, `I` and `H` after every ply, plus a castling stress test — with no difference, and CPW perft to depth 3 passes. `numerical_packed.html` was rebuilt from its own source with the same changes carried over and run in lock step against the previous file over 120 games and 32,770 steps, comparing the full state after every step: no difference. Mate for either side, stalemate, the automatic fifty-move draw, insufficient material, resignation, flag fall and `TM` were all reached along the way. The markup did not change, so the validator and the rendering checks above still stand.
-- **The rule optimizations of October 2026.** Both builds took over the next round of rule-side shortenings from [FideLite](https://github.com/cuneytinann/FideLite): the castling rook's square is written `f+=k>0||-2`, the start-rank test `y%6<2` (a pawn never stands on the first or last rank), and `I` writes the square colour as `i*9/8%2+1` and the material weight as `p>9?p>11:9`. `index.html` went from 3,022 to 3,018 bytes and the packed payload from 1,189 to 1,184. Both builds were checked against their previous versions — the move generator for every piece, target and threat mode, the legal-move lists and `I`, over 250 positions from random games and special positions — with no difference; sanity perft passes, and the new packed file unpacks to exactly the new source.
+- **Earlier rounds.** The switch to 0–63 square numbers and the rule optimizations of September and early October 2026 were each checked against the file before them, on the 8×8 engine both builds used at the time. The rewrite below replaced that engine.
+- **The 0x88 rewrite of October 2026.** Both builds dropped their own 8×8 engine for FideLite's 0x88 one, written with `L3`'s names. The material test `V` is new — the material half of FideLite's dead-position test — and it was run against the old `I` and `H` on 600,000 random positions, 300,000 sparse and 300,000 crowded: the same insufficient-material verdict, and the same answer to *can the opponent still mate* for either side, every time. `index.html` was then run in Chrome side by side with its previous version, both pages clicked on the same screen squares. After every step the 64 cells (piece, colour, outline, background), the status line, both clocks, the offer light and the radio button were compared, and so were the board, the side to move, the castling rights, the counters, the repetition count and the offers: 6,080 comparisons over 18 games, from the starting position and from ten special positions (promotions, castling, en passant, bare kings, minor pieces), 17 promotions through the picker, 98 screenshots identical byte for byte. Scripted endings — `W#`, `B#`, `SM`, `TM`, `BT`, `RM`, `BR`, `IM`, and `50` on ply 100 — came out the same on both. `numerical_packed.html` ran in lock step against the previous file — the old one fed 0–63, the new one the same squares as rank and file digits, with illegal, off-board and junk input mixed in — over 180 games and 5,755 legal moves, comparing every dialog title and the result code: no difference, all fourteen codes reached. The sizes went from 3,018 to 2,838 bytes and from 1,201 to 1,118.
 
 ## Unpacking
 
@@ -155,7 +158,7 @@ Both builds were checked by running them rather than by reading them. `index.htm
 eval(_)   →   console.log(_)
 ```
 
-Nothing in the loop touches the game, so it is safe to do this in Node. What falls out is 1,449 bytes of source.
+Nothing in the loop touches the game, so it is safe to do this in Node. What falls out is 1,222 bytes of source.
 
 **Download the file rather than copying it out of the browser.** The dictionary keys are control characters from the `\x01`–`\x1f` range, and the clipboard — or any editor that tidies up line endings — will quietly destroy them.
 
@@ -166,33 +169,47 @@ Nothing in the loop touches the game, so it is safe to do this in Node. What fal
 | option | value |
 | --- | --- |
 | `reassignVars` | `false` |
-| `crushGainFactor` | `0` |
-| `crushLengthFactor` | `0` |
-| `crushCopiesFactor` | `0` |
+| `crushGainFactor` | `0.5` |
+| `crushLengthFactor` | `0.5` |
+| `crushCopiesFactor` | `0.5` |
 | `crushTiebreakerFactor` | `0` |
 | `useES6` | `true` |
 
-Stage 2 wins, the regexp character class: `[\x01-\x1f@Aj_ZXV]`, 38 tokens, 36 substitution rounds. The bytes land like this:
+Stage 2 wins, the regexp character class: `[\x01-\x1fP-S]`, 35 tokens. The bytes land like this:
 
 ```
    8 B  <script>
-1184 B  packed payload
+1101 B  packed payload
    9 B  </script>
 ----
-1201 B
+1118 B
 ```
 
-Turning `reassignVars` on saves four bytes and brings the file down to 1,197. It stays off: the renamer spends `P` through `U` as dictionary tokens, so the source that comes back out has had its variables shuffled and no longer reads as the program anyone wrote. Four bytes do not buy that back.
+Turning `reassignVars` on changes nothing: 1,118 either way, at every one of the 350 settings below. The renaming it would do has already been done by hand, as the next section explains.
 
-350 crusher combinations were tried for this build — gain 0 to 3, length 0 to 2, copies 0 to 2 in steps of a half, tiebreaker 0 or 1. All four at zero is the best, at 1,189; the worst lands at 1,258. Each change carried over from FideLite was also packed on its own first: the pawn walk saves 7 bytes, castling 5, the `I` filter with the `H` swap 6, the en passant list 2, and the square colour nothing, alone or in company — it was taken for consistency with the other builds; together they take the payload from 1,211 to 1,189. The one change left out is sharing `T|b[f]` in `G`, which saves a byte in plain form and costs three once packed. The rule optimizations of October 2026 left the settings where they were: all four at zero still win, now at 1,184, and the worst of the 350 lands at 1,254. Packed one at a time, the castling rook saves 3 bytes, and the start-rank test, the square colour and the material weight one each.
+350 crusher combinations were tried — gain 0 to 3, length 0 to 2, copies 0 to 2 in steps of a half, tiebreaker 0 or 1. Thirty-eight of them tie at 1,101; the settings above are the first in that order, and the worst of the 350 lands at 1,115.
 
-### The packed file was not built from the shortest source
+### The packed source is renamed for the packer
 
-The source above runs to 1,449 bytes. Measured on the previous generation, when this source ran to 1,474, the same game written to be as small as possible *in plain form* came to 1,401 — seventy-three bytes lighter — and packing that one produced a **bigger** file.
+The source above runs to 1,222 bytes, and it is not the source anyone would write by hand. It began as the same 0x88 core `index.html` runs, with `L3_numerical`'s dialog around it, and a straight port packs to 1,153. Then it was cut down for this build alone. There is no search to feed, so the legal-move iterator `O` and the verdict function `Z` are folded into the one place each is used; the clocks live on `G` beside the position keys; `U` no longer records `X`, which only the clickable build reads; and the offer path no longer works out a verdict the move has already given. That takes the payload to 1,108.
 
-Aliases are the reason. `a=Math.abs`, `N='indexOf'`, a single shared `Z`/`A`/`D`/`F` instead of the same bodies inlined at every call site: each of these wins in plain form and loses under the packer, because RegPack is paid in repeated substrings and an alias is precisely the thing that takes repetition away. Spelled out and inlined, the source runs 73 bytes longer on its own and 40 bytes shorter once packed.
+Then the names were moved. RegPack's dictionary tokens are characters the source does not use, and every capital letter a name takes up is one the packer cannot have. So the names went onto lower-case letters, shared out by scope wherever two of them never meet. No name is left on a capital: the only capitals in the source are the `D` of `Date` and the `O` of `indexOf`. That leaves capitals free for the dictionary — RegPack takes `P`–`S`, four more tokens — and brings the payload to 1,101:
 
-So there are two lineages of one program, and the one that got packed is not the short one.
+| straight port (`L3_numerical`'s names) | packed source | |
+| --- | --- | --- |
+| `G` | `f` | reach; here also the repetition table and the clocks |
+| `T` | `p` | is this square attacked |
+| `U` | `m` | make the move on a copy |
+| `L` | `l` | is this move legal |
+| `M` | `s` | play it |
+| `V` | `q` | can the other side still mate |
+| `C` | `j` | castling rights |
+| `R` | `a` | how many times this position has come up |
+| `K`, `Y` | `d`, `x` | the typed move, the target square |
+| `P`, `S` in `G`; `P`, `Q` in `U` | `n`, `o`; `n`, `q` | piece type, the square walker; piece type, the square in between |
+| `A`, `W` in `V` | `a`, `k` | material by side, pawns on the board |
+
+RegPack's own `reassignVars` finds nothing left to do.
 
 ---
 
@@ -214,7 +231,7 @@ MIT
 
 # Lichess-equivalent (Türkçe)
 
-FIDE'nin değil, **lichess'in kurallarıyla** hükmeden bir satranç hakemi; tek bir HTML dosyasında **3.018 bayt** — ve aynı hakemin tahtasından soyulmuş hâli, **1.201 baytta**. İki oyuncu, tek ekran. Kütüphane yok, derleme adımı yok, sunucu yok. Dosyayı indirin, çift tıklayın, oynayın.
+FIDE'nin değil, **lichess'in kurallarıyla** hükmeden bir satranç hakemi; tek bir HTML dosyasında **2.838 bayt** — ve aynı hakemin tahtasından soyulmuş hâli, **1.118 baytta**. İki oyuncu, tek ekran. Kütüphane yok, derleme adımı yok, sunucu yok. Dosyayı indirin, çift tıklayın, oynayın.
 
 İki kural kitabı birbirine yakındır ama aynı kitap değildir; yolların ayrıldığı her nokta aşağıda tek tek yazılı.
 
@@ -224,8 +241,8 @@ FIDE'nin değil, **lichess'in kurallarıyla** hükmeden bir satranç hakemi; tek
 
 | dosya | arayüz | bayt | GitHub Pages | proje sitesi |
 | --- | --- | --- | --- | --- |
-| `index.html` | tıklanabilir tahta, saat, lichess renkleri | 3.018 | [Lichess-equivalent](https://cuneytinann.github.io/Lichess-equivalent/) | [Lichess-equivalent.html](https://www.fidelite.art/special/Lichess-equivalent.html) |
-| `numerical_packed.html` | `prompt()` kutusuna yazılan kare numaraları, tahta yok | 1.201 | [numerical_packed.html](https://cuneytinann.github.io/Lichess-equivalent/numerical_packed.html) | [Lichess-equivalent_numerical.html](https://www.fidelite.art/special/Lichess-equivalent_numerical.html) |
+| `index.html` | tıklanabilir tahta, saat, lichess renkleri | 2.838 | [Lichess-equivalent](https://cuneytinann.github.io/Lichess-equivalent/) | [Lichess-equivalent.html](https://www.fidelite.art/special/Lichess-equivalent.html) |
+| `numerical_packed.html` | `prompt()` kutusuna yazılan kare numaraları, tahta yok | 1.118 | [numerical_packed.html](https://cuneytinann.github.io/Lichess-equivalent/numerical_packed.html) | [Lichess-equivalent_numerical.html](https://www.fidelite.art/special/Lichess-equivalent_numerical.html) |
 
 Proje sitesinde iki sürüm de `special/` altında, `L1`–`L3` merdiveninin bir kenarında durur. O merdivenin bir basamağı değildirler; başka bir kural kitabını izlerler.
 
@@ -233,19 +250,19 @@ Proje sitesinde iki sürüm de `special/` altında, `L1`–`L3` merdiveninin bir
 
 **Tahtayla.** Bir taşa tıklayın, sonra gitmesini istediğiniz kareye. Yasal kareler birer nokta alır, alabileceğiniz taş bir halka; çıktığınız ve indiğiniz kare boyalı kalır; şah altındaki şahın karesi kırmızı parlar. Her hamleden sonra tahta dönüp sırası gelene bakar. Bir piyon son yatayı bulduğunda indiği sütun seçiciye dönüşür: dört terfi seçeneği tahtanın üstünde, her biri gri bir diskin içinde alt alta durur, istediğinize tıklarsınız. `½` beraberlik teklif eder, hakkınız varsa talep eder — ve cevap sırası sizdeyken ya da konum üçüncü kez geldiğinde kendiliğinden yanar; `⚐` terk eder. İki denetim yan yana ve bilerek birbirine benzer: aynı boy, renk üstüne beyaz, beraberlikte yeşil, terkte kırmızı. Saat on dakikadan başlar ve her hamlede beş saniye geri verir.
 
-**Tahtasız.** `numerical_packed.html` hiçbir şey çizmez. Kareler a1'den h8'e doğru 0'dan 63'e numaralıdır — motorun kendi indeksleri; hamle, iki numaranın uç uca yazılmış hâlidir: e2–e4 `1228` olur. Terfi için beşinci bir basamak eklersiniz — `0` fil, `1` kale, `2` at, başka bir şey vezir. Beraberlik de aynı yoldan teklif edilir: hamlenin sonuna rakam olmayan bir karakter iliştirirsiniz, `1228x` yazmak e2–e4'ü teklifle birlikte oynar. O karakteri tek başına yazarsanız teklif yine geçerlidir ama sıra sizde kalır, arkasından bir hamle borcunuz olur. Rakip aynı şekilde yanıt verirse beraberlik olur; düz bir hamle oynarsa teklifi reddetmiş ve silmiş olur. Konum daha önce üç kez oluştuysa aynı karakter üçlü tekrarı doğrudan talep eder. Terk etmek için kutuyu boş bırakın ya da İptal'e basın.
+**Tahtasız.** `numerical_packed.html` hiçbir şey çizmez. Bir kare iki basamaktır, önce yatay sonra sütun, ikisi de 0'dan sayılır: a1 `00`, e2 `14`, h8 `77` — motorun kendi 0x88 indeksi, on altılık tabanda yazılmış hâliyle. Hamle, iki karenin uç uca yazılmış hâlidir: e2–e4 `1434` olur. Basamaklardan birinde `8` ya da `9` tahtanın dışını gösterir; hakem onu da her yasadışı hamle gibi reddeder. Terfi için beşinci bir basamak eklersiniz — `0` fil, `1` kale, `2` at, başka bir şey vezir. Beraberlik de aynı yoldan teklif edilir: hamlenin sonuna rakam olmayan bir karakter iliştirirsiniz, `1434x` yazmak e2–e4'ü teklifle birlikte oynar. O karakteri tek başına yazarsanız teklif yine geçerlidir ama sıra sizde kalır, arkasından bir hamle borcunuz olur. Rakip aynı şekilde yanıt verirse beraberlik olur; düz bir hamle oynarsa teklifi reddetmiş ve silmiş olur. Konum daha önce üç kez oluştuysa aynı karakter üçlü tekrarı doğrudan talep eder. Terk etmek için kutuyu boş bırakın ya da İptal'e basın.
 
 İki sürümün ayrıştığı tek yer burası ve bu bir kural farkı değil, bir jest farkı. Tahtada beraberlik teklifi `½` ile kaldırıp yine `½` ile indirdiğiniz, havada duran bir bayraktır; iletişim kutusunda ise hamleye binerek gider. İki durumda da hakem aynı iki biti okur ve iki durumda da rakibin düz hamlesi teklifi reddeder. İletişim kutusunun başlığında Beyaz'ın saati, Siyah'ın saati ve hakemden geçirebildiğiniz son hamle durur; yasadışı bir hamle sessizce reddedildiğinde sonuncunun hiç değişmediğini oradan anlarsınız. İki saat de 900.000 milisaniyeden başlar — artırımsız on beş dakika — ve kutu açıkken işlemeyi sürdürür, yani düşünmek size tahta başındaki kadara mal olur. Konumu takip etmek ise tümüyle sizin işiniz.
 
 ## İki dosya, tek hakem
 
-Bunlar tam sürüm ile kırpılmış sürüm değil. Aynı oyun, aynı kurallar, aynı öz — ve **o özün gerçek bedeli 1.201 bayt.** Üstüne binen her şey satranç için değil, sizin için var.
+Bunlar tam sürüm ile kırpılmış sürüm değil. Aynı oyun, aynı kurallar, aynı öz — ve **o özün gerçek bedeli 1.118 bayt.** Üstüne binen her şey satranç için değil, sizin için var.
 
-`index.html`'in paketli dosyanın ötesinde harcadığı 1.816 bayt şunu satın alıyor: gördüğünüz bir tahta, tıkladığınız taşlar, işleyen bir saat, tahtanın üstüne çizilen bir terfi seçicisi, hangi karenin açık olduğunu söyleyen renkler. Hepsini soyun, tek bir kural yerinden oynamaz. Mat yine mattır, geçerken alma yine geçerken almadır, elli hamle sayacı yine tam aynı yarım hamlede dolar.
+`index.html`'in paketli dosyanın ötesinde harcadığı 1.720 bayt şunu satın alıyor: gördüğünüz bir tahta, tıkladığınız taşlar, işleyen bir saat, tahtanın üstüne çizilen bir terfi seçicisi, hangi karenin açık olduğunu söyleyen renkler. Hepsini soyun, tek bir kural yerinden oynamaz. Mat yine mattır, geçerken alma yine geçerken almadır, elli hamle sayacı yine tam aynı yarım hamlede dolar.
 
-Yani iki dosya iki ayrı soruya yanıt veriyor. *Bir satranç oyununu yönetmenin bedeli nedir?* Bin iki yüz bayt. *Bir insanın o oyundan keyif almasının bedeli nedir?* Bin sekiz yüz bayt daha.
+Yani iki dosya iki ayrı soruya yanıt veriyor. *Bir satranç oyununu yönetmenin bedeli nedir?* Bin yüz bayt. *Bir insanın o oyundan keyif almasının bedeli nedir?* Bin yedi yüz bayt daha.
 
-Bu, iddia edilmektense ölçülmeyi hak eden bir cümle; o yüzden iki sürüm yan yana koşturuldu. Önce kural katmanları, hamle hamle: 21.410 yarım hamle boyunca sırası gelen tarafın her taşının yasal hamle listesi kare kare karşılaştırıldı, her hamleden sonra da tahta, sıra, geçerken alma karesi, rok hakları, yarım hamle sayacı ve materyal hükümleri. 142.253 karşılaştırma, tek bir ayrılık yok. Sonra elli tam oyun: Chrome'da tıklanarak oynandı ve `prompt()` kutusuna basamak basamak yeniden girildi — 16.630 yarım hamle, her seferinde aynı sonuç kodu.
+Bu, iddia edilmektense ölçülmeyi hak eden bir cümle; o yüzden iki sürüm yan yana koşturuldu. Önce kural katmanları, hamle hamle: 21.410 yarım hamle boyunca sırası gelen tarafın her taşının yasal hamle listesi kare kare karşılaştırıldı, her hamleden sonra da tahta, sıra, geçerken alma karesi, rok hakları, yarım hamle sayacı ve materyal hükümleri. 142.253 karşılaştırma, tek bir ayrılık yok. Sonra elli tam oyun: Chrome'da tıklanarak oynandı ve `prompt()` kutusuna basamak basamak yeniden girildi — 16.630 yarım hamle, her seferinde aynı sonuç kodu. Ekim 2026'da iki sürüm de 0x88 motoruna geçince ikinci sınama yeni çift üzerinde yeniden yapıldı: Chrome'da tıklanarak oynanan 30 oyun, 10.377 yarım hamle, basamak basamak yeniden girildi — her seferinde aynı sonuç kodu, aynı son tahta.
 
 ## Neden lichess, neden FIDE değil
 
@@ -296,7 +313,7 @@ Proje sitesindeki FIDE sürümünde on beş kod vardır ve yetersiz materyale `D
 
 ## İçinde neler var
 
-- **Bütün taş hareketleri**, aritmetikle çıkarılmış. Yön tablosu yok, ofset dizisi yok.
+- **Bütün taş hareketleri**, 0x88 tahtada aritmetikle çıkarılmış. Yön tablosu yok, ofset dizisi yok.
 - **Tam yasallık.** Kendi şahınızı açıkta bırakacak bir hamle hiçbir zaman geçmez.
 - **İki kanatta rok**, hepsi denetlenerek: hak hâlâ duruyor mu, kalenin yolu boş mu, şah tehdit altında mı, geçtiği kare tehdit altında mı, indiği kare tehdit altında mı.
 - **Geçerken alma**, yukarıdaki tekrar anahtarı inceliğiyle birlikte.
@@ -327,37 +344,40 @@ Tam FIDE hakemi için — on beş kod, ölü pozisyonlar, sekiz arayüz — [fid
 
 | parça | bayt | |
 | --- | --- | --- |
-| markup ve CSS | 629 | tahta, panel, denetimler, renkler, yerleşim |
+| markup ve CSS | 627 | tahta, panel, denetimler, renkler, yerleşim |
 | `<script>` etiketleri | 17 | |
-| durum ve takma adlar | 181 | tahta, saat, rok hakları, tekrar tablosu |
-| `G` | 248 | bu taş o kareye ulaşabilir mi |
-| `V` | 51 | bu kare tehdit altında mı |
-| `L` | 101 | bu hamle yasal mı — oyna, sor, geri al |
-| `C` | 28 | bir karenin düşürdüğü rok hakkı |
-| `M` | 221 | sayaç, terfi, geçerken alınan piyon, kale sıçraması, geçerken alma karesi |
-| `I`, `H` | 153 | materyal ve matın mümkün olup olmadığı |
-| `Z`, `D`, `F` | 151 | hüküm, beraberlik, bayrak |
-| `j` | 62 | saat |
-| kurulum | 71 | 64 hücre, açılışta üretiliyor |
-| `d` | 782 | tahtayı ve üstündeki terfi seçicisini çiz |
-| `A`, `Bt`, `S` | 292 | hamleyi oyna, düğmeler, tıklama |
+| durum | 125 | 0x88 tahta, rok hakları, geçerken alma karesi, sayaçlar, seçim |
+| `C` | 29 | bir karenin düşürdüğü rok hakkı |
+| `G` | 242 | bu taş o kareye ulaşabilir mi |
+| `T` | 53 | bu kare tehdit altında mı — aksi söylenmedikçe şahın karesi |
+| `U` | 136 | hamleyi bir kopyada yap: terfi, geçerken alınan piyon, kale sıçraması |
+| `L` | 55 | bu hamle yasal mı — yap, sor, geri al |
+| `M` | 110 | hamleyi gerçekten oyna: sayaç, rok hakları, sıra, geçerken alma karesi, konum anahtarı |
+| `V` | 135 | öbür taraf hâlâ mat edebilir mi, yalnızca materyale bakarak |
+| `s`, `J` | 52 | süre bitimi ve terk hükmü, talepler |
+| tekrar tablosu ve saat | 42 | |
+| `j` | 52 | saat |
+| takma adlar ve kurulum | 109 | `innerHTML`, taş glifleri, açılışta üretilen 64 hücre |
+| `F` | 678 | tahtayı ve üstündeki terfi seçicisini çiz |
+| `E`, `K` | 345 | hamleyi oyna ve hükmü ver, düğmeler, tıklama |
 | ilk çizim ve interval | 31 | |
-| **toplam** | **3.018** | |
+| **toplam** | **2.838** | |
 
-Başka türlü bölersek: kurallar **1.112** bayt, onları gösteren sayfa **1.906**. Hakem ucuz, sahne pahalı — paketli dosyanın öne sürdüğü şey tam olarak bu.
+Başka türlü bölersek (proje sitesinin kaynağı boyadığı gibi, her hamleden sonraki hüküm de kurala sayılarak) kurallar **1.107** bayt, onları gösteren sayfa **1.731**. Hakem ucuz, sahne pahalı — paketli dosyanın öne sürdüğü şey tam olarak bu.
+
+Adlar FideLite'ın `L3`'ündeki adlar: bir harf ikisinde de aynı işi görüyor; `C`, `G`, `T`, `U`, `L` ve `M` de FideLite'ın `engine.js`'indeki işlevlerin bayt bayt aynısı. Tablonun kimliği `T` değil `u`, çünkü `T` artık şah denetimi.
 
 ## Doğrulama
 
 İki sürüm de okunarak değil, koşturularak sınandı. `index.html` hem DevTools protokolü üzerinden gerçek Chrome'da hem de jsdom altında sürüldü; `numerical_packed.html` Node'da, taklit bir `prompt()` karşısında çalıştı.
 
-- **perft**, iki sürümde de, beş standart pozisyon üzerinde: başlangıç dizilişinden 5. derinlikte 4.865.609; Kiwipete'ten 4. derinlikte 4.085.603; CPW 3. pozisyondan 5. derinlikte 674.624; 4. pozisyondan 4. derinlikte 422.333; 5. pozisyondan 4. derinlikte 2.103.487.
+- **perft**, iki sürümde de, beş standart pozisyon üzerinde: başlangıç dizilişinden 4. derinlikte 197.281; Kiwipete'ten 3. derinlikte 97.862; CPW 3. pozisyondan 4. derinlikte 43.238; 4. pozisyondan 3. derinlikte 9.467; 5. pozisyondan 3. derinlikte 62.379. Hamle üretici FideLite'ınki; FideLite'ın kendi test takımı onu çok daha derine sürüyor.
 - **On dört bitişin hepsi**, tek tek üretilip sınandı — aralarında `TM` ile `RM` ve tam 100. yarım hamlede tetiklenen otomatik `50` de var.
 - **İki sürüm birbirine karşı**, iki ayrı biçimde: kural katmanında 21.410 yarım hamlelik adım adım karşılaştırma, 142.253 yasal hamle listesi ve her hamleden sonra tam durum; ardından Chrome'da tıklanarak oynanıp sayısal sürümde basamak basamak tekrarlanan 50 tam oyun, 16.630 yarım hamle. İki koşuda da fark çıkmadı.
-- **Markup**: W3C Nu Html Checker `index.html` için sıfır hata, sıfır uyarı veriyor. Standart mod, UTF-8, BOM yok, dosyada tek bir satır sonu bile yok.
+- **Markup**: W3C Nu Html Checker `index.html` için sıfır hata, sıfır uyarı veriyor; 0x88'e geçişten önce de sonra da. Standart mod, UTF-8, BOM yok, dosyada tek bir satır sonu bile yok.
 - **Çizim**, Chrome'da hücre hücre: 71×71 karelerden oluşan 568×568 tahta; son hamle ve seçim açık ve koyu karelerde ayrı ayrı doğru tonda; şah parlaması yalnız şahın karesinde; terfi diskleri doğru sütunun doğru dört karesine oturuyor ve dört taş da altlarında ne olursa olsun hamleyi yapanın renginde çıkıyor.
-- **0–63'e geçiş.** Kare numaraları 1–64'ten 0–63'e geçerken `numerical_packed.html` aşağıdaki ayarlarla yeniden paketlendi ve önceki dosyayla kilit adımlı koşturuldu — eskisine 1–64, yenisine aynı kareler 0–63 olarak verildi — 100 oyunda 11.540 yarım hamle boyunca her hamleden sonra tam durum karşılaştırıldı: fark yok. Beş standart pozisyonda 3. derinliğe kadar perft geçiyor; geçersiz girdi senaryoları da geçiyor: `-1`, aynı kareye gidiş, tahta dışı kareler, son yatayın ötesine sürülen piyon.
-- **Eylül 2026 kural optimizasyonları.** İki sürüm de [FideLite](https://github.com/cuneytinann/FideLite)'ta yapılan kural tarafı optimizasyonlarını aldı: piyonun çift adımı da rok da `S()` ile yürüyor, rok kalesinin karesi şahın hedefinden hesaplanıyor, başlangıç yatayı testi kısaldı, `I` kare rengini ve saydığı tarafı daha ucuza okuyor, paketli sürüm de geçerken alma karesini iki adım yerine tek bir listeyle yazıyor. Hiçbiri tek bir hükmü değiştirmiyor. `index.html` önceki sürümüyle rastgele oyunlarda yan yana koşturuldu — her yarım hamleden sonra yasal hamle listeleri, geçerken alma karesi, `I` ve `H`, ayrıca bir rok zorlama testi — fark çıkmadı; CPW perft 3. derinliğe kadar geçiyor. `numerical_packed.html` aynı değişiklikler kendi kaynağına taşınarak yeniden paketlendi ve önceki dosyayla 120 oyunda 32.770 adım boyunca kilit adımlı koşturuldu, her adımdan sonra tam durum karşılaştırıldı: fark yok. Yol boyunca iki tarafın matı, pat, otomatik elli hamle beraberliği, yetersiz materyal, terk, bayrak düşmesi ve `TM` bitişlerinin hepsi görüldü. İşaretleme değişmediği için yukarıdaki doğrulayıcı ve çizim sınamaları geçerliliğini koruyor.
-- **Ekim 2026 kural optimizasyonları.** İki sürüm de [FideLite](https://github.com/cuneytinann/FideLite)'tan kural tarafındaki yeni kısaltmaları aldı: rok kalesinin karesi `f+=k>0||-2`, başlangıç yatayı testi `y%6<2` (piyon birinci ya da son yatayda hiç durmaz), `I` de kare rengini `i*9/8%2+1`, materyal ağırlığını `p>9?p>11:9` diye yazıyor. `index.html` 3.022 bayttan 3.018'e, paketli yük 1.189'dan 1.184'e indi. İki sürüm de önceki hâliyle karşılaştırıldı — her taş, hedef ve tehdit kipi için hamle üretici, yasal hamle listeleri ve `I`, rastgele oyunlardan ve özel pozisyonlardan 250 pozisyonda — hiçbir fark yok; sanity perft geçiyor, yeni paketli dosya da açıldığında yeni kaynağın birebir aynısını veriyor.
+- **Önceki turlar.** 0–63 kare numaralarına geçiş ile Eylül ve Ekim başı 2026 kural optimizasyonları, her biri kendinden önceki dosyaya karşı, iki sürümün o sırada kullandığı 8×8 motor üzerinde sınandı. Aşağıdaki yeniden yazım o motorun yerini aldı.
+- **Ekim 2026 0x88 yeniden yazımı.** İki sürüm de kendi 8×8 motorunu bırakıp FideLite'ın 0x88 motoruna geçti, `L3`'ün adlarıyla. Materyal sınaması `V` yeni — FideLite'ın ölü pozisyon sınamasının materyal yarısı — ve eski `I` ile `H`'ye karşı 600.000 rastgele pozisyonda koşturuldu, 300.000'i seyrek, 300.000'i kalabalık: yetersiz materyal hükmü de, iki taraf için *rakip hâlâ mat edebilir mi* yanıtı da her seferinde aynı. Ardından `index.html` Chrome'da önceki sürümüyle yan yana koşturuldu; iki sayfaya da ekranın aynı karelerinden tıklandı. Her adımdan sonra 64 hücre (taş, renk, kontur, arka plan), durum satırı, iki saat, teklif ışığı ve radyo düğmesi karşılaştırıldı; tahta, sıra, rok hakları, sayaçlar, tekrar sayısı ve teklifler de: başlangıç dizilişinden ve on özel pozisyondan (terfiler, rok, geçerken alma, çıplak şahlar, hafif taşlar) 18 oyunda 6.080 karşılaştırma, seçici üzerinden 17 terfi, bayt bayt aynı 98 ekran görüntüsü. Senaryolu bitişler — `W#`, `B#`, `SM`, `TM`, `BT`, `RM`, `BR`, `IM` ve tam 100. yarım hamlede `50` — ikisinde de aynı çıktı. `numerical_packed.html` önceki dosyayla kilit adımlı koşturuldu — eskisine 0–63, yenisine aynı kareler yatay ve sütun basamaklarıyla verildi, araya yasadışı, tahta dışı ve anlamsız girdiler karıştırıldı — 180 oyunda 5.755 yasal hamle boyunca her iletişim kutusu başlığı ve sonuç kodu karşılaştırıldı: fark yok, on dört kodun hepsine ulaşıldı. Boyutlar 3.018'den 2.838 bayta, 1.201'den 1.118'e indi.
 
 ## Paketi açma
 
@@ -367,7 +387,7 @@ Başka türlü bölersek: kurallar **1.112** bayt, onları gösteren sayfa **1.9
 eval(_)   →   console.log(_)
 ```
 
-Döngünün içinde oyuna dokunan hiçbir şey yok, bunu Node'da yapmak güvenli. Dökülen şey 1.449 baytlık kaynak.
+Döngünün içinde oyuna dokunan hiçbir şey yok, bunu Node'da yapmak güvenli. Dökülen şey 1.222 baytlık kaynak.
 
 **Dosyayı tarayıcıdan kopyalamak yerine indirin.** Sözlük anahtarları `\x01`–`\x1f` aralığındaki denetim karakterleridir; pano ya da satır sonlarını derleyip toplayan herhangi bir editör onları sessizce yok eder.
 
@@ -378,33 +398,47 @@ Döngünün içinde oyuna dokunan hiçbir şey yok, bunu Node'da yapmak güvenli
 | ayar | değer |
 | --- | --- |
 | `reassignVars` | `false` |
-| `crushGainFactor` | `0` |
-| `crushLengthFactor` | `0` |
-| `crushCopiesFactor` | `0` |
+| `crushGainFactor` | `0.5` |
+| `crushLengthFactor` | `0.5` |
+| `crushCopiesFactor` | `0.5` |
 | `crushTiebreakerFactor` | `0` |
 | `useES6` | `true` |
 
-Kazanan aşama 2, yani düzenli ifade karakter sınıfı: `[\x01-\x1f@Aj_ZXV]`, 38 token, 36 değiştirme turu. Baytlar şöyle yerleşiyor:
+Kazanan aşama 2, yani düzenli ifade karakter sınıfı: `[\x01-\x1fP-S]`, 35 token. Baytlar şöyle yerleşiyor:
 
 ```
    8 B  <script>
-1184 B  paketli yük
+1101 B  paketli yük
    9 B  </script>
 ----
-1201 B
+1118 B
 ```
 
-`reassignVars`'ı açmak dört bayt kazandırıp dosyayı 1.197'ye indiriyor. Yine de kapalı: yeniden adlandırıcı `P`–`U` harflerini sözlük tokeni olarak harcıyor, geri çıkan kaynağın değişkenleri karışmış oluyor ve metin artık kimsenin yazdığı program gibi okunmuyor. Dört bayt bunu geri satın almaya yetmez.
+`reassignVars`'ı açmak hiçbir şey değiştirmiyor: aşağıdaki 350 ayarın her birinde iki durumda da 1.118. Onun yapacağı yeniden adlandırma elle yapıldı; bir sonraki bölüm anlatıyor.
 
-Bu sürüm için 350 crusher kombinasyonu denendi — gain 0–3, length 0–2, copies 0–2 yarımlık adımlarla, tiebreaker 0 ya da 1. Dördünün de sıfır olduğu ayar en iyisi, 1.189'da; en kötüsü 1.258'e iniyor. FideLite'tan taşınan her değişiklik önce tek başına da paketlendi: piyon yürüyüşü 7 bayt kazandırıyor, rok 5, `I` süzgeci ile `H` takası 6, geçerken alma listesi 2; kare rengi ne tek başına ne öbürleriyle birlikte bir şey kazandırıyor — öbür sürümlerle tutarlılık için alındı. Hepsi birlikte yükü 1.211'den 1.189'a indiriyor. Dışarıda bırakılan tek değişiklik `G`'de `T|b[f]`'yi paylaşmak: düz hâlde bir bayt kazandırıyor, paketlenince üç bayt kaybettiriyor. Ekim 2026 kural optimizasyonları ayarı değiştirmedi: dördünün de sıfır olduğu ayar yine en iyisi, artık 1.184'te; 350 kombinasyonun en kötüsü 1.254. Tek tek paketlendiğinde rok kalesi 3 bayt, başlangıç yatayı testi, kare rengi ve materyal ağırlığı birer bayt kazandırıyor.
+350 crusher kombinasyonu denendi — gain 0–3, length 0–2, copies 0–2 yarımlık adımlarla, tiebreaker 0 ya da 1. Otuz sekizi 1.101'de berabere; yukarıdaki ayar bu sıradaki ilki, 350'nin en kötüsü 1.115'e iniyor.
 
-### Paketli dosya en kısa kaynaktan kurulmadı
+### Paket kaynağı paketleyici için yeniden adlandırıldı
 
-Yukarıdaki kaynak 1.449 bayt tutuyor. Bir önceki nesilde, bu kaynak 1.474 bayt iken ölçüldüğünde, aynı oyunun *düz hâlde* olabildiğince küçük olacak şekilde yazılmışı 1.401 tutuyordu — yetmiş üç bayt hafif — ve onu paketlemek **daha büyük** bir dosya veriyordu.
+Yukarıdaki kaynak 1.222 bayt tutuyor ve kimsenin elle yazacağı bir kaynak değil. `index.html`'in koşturduğu aynı 0x88 özüyle, çevresinde `L3_numerical`'ın iletişim kutusuyla başladı; düz bir aktarım 1.153'e paketleniyor. Sonra yalnız bu sürüm için kırpıldı. Besleyecek bir arama yok; bu yüzden yasal hamle gezgini `O` ile hüküm işlevi `Z`, her biri kullanıldığı tek yere gömüldü; saatler konum anahtarlarının yanında, `G`'nin üstünde duruyor; `U` artık yalnız tıklanan sürümün okuduğu `X`'i yazmıyor; teklif yolu da hamlenin zaten verdiği hükmü bir daha hesaplamıyor. Bu, yükü 1.108'e indiriyor.
 
-Sebep takma adlar. `a=Math.abs`, `N='indexOf'`, aynı gövdeleri her çağrı yerine gömmek yerine tek bir ortak `Z`/`A`/`D`/`F`: bunların her biri düz hâlde kazandırıp paketleyicide kaybettiriyor, çünkü RegPack tekrar eden dizgelerle beslenir ve takma ad tam da tekrarı ortadan kaldıran şeydir. Açık yazılıp gömüldüğünde kaynak kendi başına 73 bayt uzuyor, paketlendikten sonra 40 bayt kısalıyor.
+Sonra adlar taşındı. RegPack'in sözlük tokenleri kaynağın kullanmadığı karakterlerdir ve bir adın tuttuğu her büyük harf, paketleyicinin alamadığı bir harftir. Bu yüzden adlar küçük harflere taşındı; hiç karşılaşmayan adlar aynı harfi kapsama göre paylaştı. Büyük harfte hiçbir ad kalmadı: kaynaktaki büyük harfler yalnız `Date`'in `D`'si ile `indexOf`'un `O`'su. Büyük harfler sözlüğe kalıyor — RegPack `P`–`S`'yi, dört token daha, alıyor — ve yük 1.101'e iniyor:
 
-Yani tek bir programın iki soyu var ve paketlenen, kısa olan değil.
+| düz aktarım (`L3_numerical`'ın adları) | paket kaynağı | |
+| --- | --- | --- |
+| `G` | `f` | ulaşım; burada ayrıca tekrar tablosu ve saatler |
+| `T` | `p` | bu kare tehdit altında mı |
+| `U` | `m` | hamleyi bir kopyada yap |
+| `L` | `l` | bu hamle yasal mı |
+| `M` | `s` | oyna |
+| `V` | `q` | öbür taraf hâlâ mat edebilir mi |
+| `C` | `j` | rok hakları |
+| `R` | `a` | bu konumun kaçıncı kez geldiği |
+| `K`, `Y` | `d`, `x` | yazılan hamle, hedef kare |
+| `G`'de `P`, `S`; `U`'da `P`, `Q` | `n`, `o`; `n`, `q` | taş türü, kare yürüyücüsü; taş türü, aradaki kare |
+| `V`'de `A`, `W` | `a`, `k` | taraf başına materyal, tahtada piyon var mı |
+
+RegPack'in kendi `reassignVars`'ı yapacak bir şey bulamıyor.
 
 ---
 
