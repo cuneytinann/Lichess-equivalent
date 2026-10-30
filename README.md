@@ -2,7 +2,7 @@
 
 # Lichess-equivalent
 
-A chess arbiter that plays by **lichess's rules** rather than FIDE's, in a single HTML file of **2,828 bytes** — and the same arbiter stripped of its board, in **1,088**. Two players, one screen. No libraries, no build step, no server. Download a file, double-click, play.
+A chess arbiter that plays by **lichess's rules** rather than FIDE's, in a single HTML file of **2,804 bytes** — and the same arbiter stripped of its board, in **1,088**. Two players, one screen. No libraries, no build step, no server. Download a file, double-click, play.
 
 The two rulebooks are close, but they are not the same book, and every place they part ways is written down below.
 
@@ -12,7 +12,7 @@ Part of the [Golfstack](https://www.fidelite.art/) project.
 
 | file | interface | bytes | GitHub Pages | project site |
 | --- | --- | --- | --- | --- |
-| `index.html` | clickable board, clock, lichess colours | 2,828 | [Lichess-equivalent](https://cuneytinann.github.io/Lichess-equivalent/) | [Lichess-equivalent.html](https://www.fidelite.art/special/Lichess-equivalent.html) |
+| `index.html` | clickable board, clock, lichess colours | 2,804 | [Lichess-equivalent](https://cuneytinann.github.io/Lichess-equivalent/) | [Lichess-equivalent.html](https://www.fidelite.art/special/Lichess-equivalent.html) |
 | `numerical_packed.html` | square numbers typed into a `prompt()` box, no board | 1,088 | [numerical_packed.html](https://cuneytinann.github.io/Lichess-equivalent/numerical_packed.html) | [Lichess-eqv_min.html](https://www.fidelite.art/builds/special/Lichess-eqv_min.html) |
 
 On the project site both builds live under `special/`, off to the side of the `L1`–`L3` ladder. They are not another rung on it; they follow a different rulebook.
@@ -29,7 +29,7 @@ That is the one place the two builds part company, and it is a difference of ges
 
 These are not a full version and a cut-down one. Same game, same rules, same core — and **1,088 bytes is what that core really costs.** Everything on top of it exists for you, not for chess.
 
-The 1,740 bytes `index.html` spends beyond the packed file buy a board you can see, pieces you can click, a clock that ticks, a promotion picker drawn onto the board, colours that tell you which squares are open. Strip all of it away and not one rule moves. Mate is still mate, en passant is still en passant, the fifty-move counter still fills on exactly the same ply.
+The 1,716 bytes `index.html` spends beyond the packed file buy a board you can see, pieces you can click, a clock that ticks, a promotion picker drawn onto the board, colours that tell you which squares are open. Strip all of it away and not one rule moves. Mate is still mate, en passant is still en passant, the fifty-move counter still fills on exactly the same ply.
 
 So the two files answer two different questions. *What does it cost to referee a game of chess?* Eleven hundred bytes. *What does it cost to let a human enjoy one?* Another seventeen hundred.
 
@@ -115,7 +115,7 @@ Every byte of `index.html`, by part.
 
 | part | bytes | |
 | --- | --- | --- |
-| markup and CSS | 627 | board, panel, controls, colours, layout |
+| markup and CSS | 598 | board, panel, controls, colours, layout |
 | `<script>` tags | 17 | |
 | state | 122 | the 0x88 board, castling rights, en passant square, counters, selection |
 | `C` | 29 | which castling right a square forfeits |
@@ -129,12 +129,12 @@ Every byte of `index.html`, by part.
 | repetition table and clock | 42 | |
 | `j` | 52 | the clock |
 | aliases and setup | 109 | `innerHTML`, the piece glyphs, the 64 cells generated at load |
-| `F` | 678 | draw the board, and the promotion picker on it |
+| `F` | 683 | draw the board, and the promotion picker on it |
 | `E`, `K` | 345 | play the move and give the verdict, the buttons, the click |
 | first draw and interval | 31 | |
-| **total** | **2,828** | |
+| **total** | **2,804** | |
 
-Sliced the other way (the way the project site colours the source, with the verdict after each move counted as rules), the rules come to **1,097** bytes and the page that shows them to **1,731**. The referee is cheap and the stage is expensive, which is exactly the argument the packed file makes.
+Sliced the other way (the way the project site colours the source, with the verdict after each move counted as rules), the rules come to **1,097** bytes and the page that shows them to **1,707**. The referee is cheap and the stage is expensive, which is exactly the argument the packed file makes.
 
 The names are those of FideLite's `L3`: a letter does the same job in both, and `C`, `G`, `T`, `U`, `L` and `M` are byte for byte the functions in FideLite's `engine.js`. The table's id is `u` rather than `T`, because `T` is now the check test.
 
@@ -238,7 +238,7 @@ MIT
 
 # Lichess-equivalent (Türkçe)
 
-FIDE'nin değil, **lichess'in kurallarıyla** hükmeden bir satranç hakemi; tek bir HTML dosyasında **2.828 bayt** — ve aynı hakemin tahtasından soyulmuş hâli, **1.088 baytta**. İki oyuncu, tek ekran. Kütüphane yok, derleme adımı yok, sunucu yok. Dosyayı indirin, çift tıklayın, oynayın.
+FIDE'nin değil, **lichess'in kurallarıyla** hükmeden bir satranç hakemi; tek bir HTML dosyasında **2.804 bayt** — ve aynı hakemin tahtasından soyulmuş hâli, **1.088 baytta**. İki oyuncu, tek ekran. Kütüphane yok, derleme adımı yok, sunucu yok. Dosyayı indirin, çift tıklayın, oynayın.
 
 İki kural kitabı birbirine yakındır ama aynı kitap değildir; yolların ayrıldığı her nokta aşağıda tek tek yazılı.
 
@@ -248,7 +248,7 @@ FIDE'nin değil, **lichess'in kurallarıyla** hükmeden bir satranç hakemi; tek
 
 | dosya | arayüz | bayt | GitHub Pages | proje sitesi |
 | --- | --- | --- | --- | --- |
-| `index.html` | tıklanabilir tahta, saat, lichess renkleri | 2.828 | [Lichess-equivalent](https://cuneytinann.github.io/Lichess-equivalent/) | [Lichess-equivalent.html](https://www.fidelite.art/special/Lichess-equivalent.html) |
+| `index.html` | tıklanabilir tahta, saat, lichess renkleri | 2.804 | [Lichess-equivalent](https://cuneytinann.github.io/Lichess-equivalent/) | [Lichess-equivalent.html](https://www.fidelite.art/special/Lichess-equivalent.html) |
 | `numerical_packed.html` | `prompt()` kutusuna yazılan kare numaraları, tahta yok | 1.088 | [numerical_packed.html](https://cuneytinann.github.io/Lichess-equivalent/numerical_packed.html) | [Lichess-eqv_min.html](https://www.fidelite.art/builds/special/Lichess-eqv_min.html) |
 
 Proje sitesinde iki sürüm de `special/` altında, `L1`–`L3` merdiveninin bir kenarında durur. O merdivenin bir basamağı değildirler; başka bir kural kitabını izlerler.
@@ -265,7 +265,7 @@ Proje sitesinde iki sürüm de `special/` altında, `L1`–`L3` merdiveninin bir
 
 Bunlar tam sürüm ile kırpılmış sürüm değil. Aynı oyun, aynı kurallar, aynı öz — ve **o özün gerçek bedeli 1.088 bayt.** Üstüne binen her şey satranç için değil, sizin için var.
 
-`index.html`'in paketli dosyanın ötesinde harcadığı 1.740 bayt şunu satın alıyor: gördüğünüz bir tahta, tıkladığınız taşlar, işleyen bir saat, tahtanın üstüne çizilen bir terfi seçicisi, hangi karenin açık olduğunu söyleyen renkler. Hepsini soyun, tek bir kural yerinden oynamaz. Mat yine mattır, geçerken alma yine geçerken almadır, elli hamle sayacı yine tam aynı yarım hamlede dolar.
+`index.html`'in paketli dosyanın ötesinde harcadığı 1.716 bayt şunu satın alıyor: gördüğünüz bir tahta, tıkladığınız taşlar, işleyen bir saat, tahtanın üstüne çizilen bir terfi seçicisi, hangi karenin açık olduğunu söyleyen renkler. Hepsini soyun, tek bir kural yerinden oynamaz. Mat yine mattır, geçerken alma yine geçerken almadır, elli hamle sayacı yine tam aynı yarım hamlede dolar.
 
 Yani iki dosya iki ayrı soruya yanıt veriyor. *Bir satranç oyununu yönetmenin bedeli nedir?* Bin yüz bayt. *Bir insanın o oyundan keyif almasının bedeli nedir?* Bin yedi yüz bayt daha.
 
@@ -351,7 +351,7 @@ Tam FIDE hakemi için — on beş kod, ölü pozisyonlar, sekiz arayüz — [fid
 
 | parça | bayt | |
 | --- | --- | --- |
-| markup ve CSS | 627 | tahta, panel, denetimler, renkler, yerleşim |
+| markup ve CSS | 598 | tahta, panel, denetimler, renkler, yerleşim |
 | `<script>` etiketleri | 17 | |
 | durum | 122 | 0x88 tahta, rok hakları, geçerken alma karesi, sayaçlar, seçim |
 | `C` | 29 | bir karenin düşürdüğü rok hakkı |
@@ -365,12 +365,12 @@ Tam FIDE hakemi için — on beş kod, ölü pozisyonlar, sekiz arayüz — [fid
 | tekrar tablosu ve saat | 42 | |
 | `j` | 52 | saat |
 | takma adlar ve kurulum | 109 | `innerHTML`, taş glifleri, açılışta üretilen 64 hücre |
-| `F` | 678 | tahtayı ve üstündeki terfi seçicisini çiz |
+| `F` | 683 | tahtayı ve üstündeki terfi seçicisini çiz |
 | `E`, `K` | 345 | hamleyi oyna ve hükmü ver, düğmeler, tıklama |
 | ilk çizim ve interval | 31 | |
-| **toplam** | **2.828** | |
+| **toplam** | **2.804** | |
 
-Başka türlü bölersek (proje sitesinin kaynağı boyadığı gibi, her hamleden sonraki hüküm de kurala sayılarak) kurallar **1.097** bayt, onları gösteren sayfa **1.731**. Hakem ucuz, sahne pahalı — paketli dosyanın öne sürdüğü şey tam olarak bu.
+Başka türlü bölersek (proje sitesinin kaynağı boyadığı gibi, her hamleden sonraki hüküm de kurala sayılarak) kurallar **1.097** bayt, onları gösteren sayfa **1.707**. Hakem ucuz, sahne pahalı — paketli dosyanın öne sürdüğü şey tam olarak bu.
 
 Adlar FideLite'ın `L3`'ündeki adlar: bir harf ikisinde de aynı işi görüyor; `C`, `G`, `T`, `U`, `L` ve `M` de FideLite'ın `engine.js`'indeki işlevlerin bayt bayt aynısı. Tablonun kimliği `T` değil `u`, çünkü `T` artık şah denetimi.
 
